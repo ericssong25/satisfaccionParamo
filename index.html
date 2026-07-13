@@ -15,34 +15,17 @@
   <body>
     <div id="root"></div>
     
-    <form name="satisfaccion-clientes" netlify netlify-honeypot="bot-field" style="display: none;">
-      <label><strong>Calidad general del contenido:</strong></label>
+    <form name="satisfaccion-clientes" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nombre-cliente" />
       <input type="text" name="calidad-general" />
-      
-      <label><strong>Diseño (línea gráfica y creatividad):</strong></label>
       <input type="text" name="diseno" />
-      
-      <label><strong>Copywriting (textos y esencia de marca):</strong></label>
       <input type="text" name="copywriting" />
-      
-      <label><strong>Comunicación con el equipo:</strong></label>
       <input type="text" name="comunicacion" />
-      
-      <label><strong>Ahorro de tiempo y presencia del negocio:</strong></label>
       <input type="text" name="ahorro-tiempo" />
-      
-      <label><strong>Enfoque próximo trimestre (múltiple):</strong></label>
       <input type="text" name="enfoque-trimestre" />
-      
-      <label><strong>Sugerencia o comentario adicional:</strong></label>
       <textarea name="sugerencia"></textarea>
-      
-      <label><strong>Fecha y Hora:</strong></label>
       <input type="text" name="fecha-hora" />
-      
-      <label><strong>Dirección IP:</strong></label>
       <input type="text" name="direccion-ip" />
-      
       <input type="text" name="bot-field" />
     </form>
     

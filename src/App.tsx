@@ -19,6 +19,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
 
   const [surveyData, setSurveyData] = useState<SurveyData>({
+    nombreCliente: '',
     calidadGeneral: '',
     diseno: '',
     copywriting: '',
@@ -28,7 +29,7 @@ function App() {
     sugerencia: '',
   });
 
-  const totalSteps = 7;
+  const totalSteps = 8;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -80,13 +81,14 @@ function App() {
     }
   };
 
-  const canProceedStep1 = surveyData.calidadGeneral !== '';
-  const canProceedStep2 = surveyData.diseno !== '';
-  const canProceedStep3 = surveyData.copywriting !== '';
-  const canProceedStep4 = surveyData.comunicacion !== '';
-  const canProceedStep5 = surveyData.ahorroTiempo !== '';
-  const canProceedStep6 = surveyData.enfoqueTrimestre.length > 0;
-  const canProceedStep7 = true;
+  const canProceedStep1 = surveyData.nombreCliente.trim().length > 0;
+  const canProceedStep2 = surveyData.calidadGeneral !== '';
+  const canProceedStep3 = surveyData.diseno !== '';
+  const canProceedStep4 = surveyData.copywriting !== '';
+  const canProceedStep5 = surveyData.comunicacion !== '';
+  const canProceedStep6 = surveyData.ahorroTiempo !== '';
+  const canProceedStep7 = surveyData.enfoqueTrimestre.length > 0;
+  const canProceedStep8 = true;
 
   const submitToNetlifyForms = async (data: SurveyData) => {
     let userIP = 'No disponible';
@@ -111,6 +113,7 @@ function App() {
 
     const formData = new FormData();
     formData.append('form-name', 'satisfaccion-clientes');
+    formData.append('nombre-cliente', data.nombreCliente);
     formData.append('calidad-general', data.calidadGeneral);
     formData.append('diseno', data.diseno);
     formData.append('copywriting', data.copywriting);
@@ -125,7 +128,9 @@ function App() {
       await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString(),
+        body: new URLSearchParams(
+          Array.from(formData.entries()) as [string, string][],
+        ).toString(),
       });
       console.log('Formulario enviado exitosamente a Netlify Forms');
     } catch (error) {
@@ -206,6 +211,36 @@ function App() {
           >
             <div className="space-y-6">
               <h2 className="text-xl md:text-2xl font-creato font-medium text-dark text-center leading-relaxed">
+                Antes de comenzar, ¿cuál es tu nombre o el nombre de tu marca?
+              </h2>
+              <p className="text-center text-sm font-garet text-dark/60">
+                Usaremos este dato solo para identificar tu respuesta.
+              </p>
+              <div>
+                <label className="block text-sm font-garet text-dark/70 mb-2">
+                  Nombre del cliente o marca (Obligatorio)
+                </label>
+                <TextInput
+                  value={surveyData.nombreCliente}
+                  onChange={(value) =>
+                    setSurveyData({ ...surveyData, nombreCliente: value })
+                  }
+                  placeholder="Escribe tu nombre o el de tu marca..."
+                  autoFocus
+                />
+              </div>
+            </div>
+          </QuestionStep>
+        )}
+
+        {currentStep === 2 && (
+          <QuestionStep
+            onNext={handleNext}
+            onBack={handleBack}
+            canProceed={canProceedStep2}
+          >
+            <div className="space-y-6">
+              <h2 className="text-xl md:text-2xl font-creato font-medium text-dark text-center leading-relaxed">
                 ¿Cómo calificarías la calidad general del contenido que publicamos para tu marca?
               </h2>
               <div className="flex flex-col gap-3">
@@ -230,11 +265,11 @@ function App() {
           </QuestionStep>
         )}
 
-        {currentStep === 2 && (
+        {currentStep === 3 && (
           <QuestionStep
             onNext={handleNext}
             onBack={handleBack}
-            canProceed={canProceedStep2}
+            canProceed={canProceedStep3}
           >
             <div className="space-y-6">
               <h2 className="text-xl md:text-2xl font-creato font-medium text-dark text-center leading-relaxed">
@@ -270,11 +305,11 @@ function App() {
           </QuestionStep>
         )}
 
-        {currentStep === 3 && (
+        {currentStep === 4 && (
           <QuestionStep
             onNext={handleNext}
             onBack={handleBack}
-            canProceed={canProceedStep3}
+            canProceed={canProceedStep4}
           >
             <div className="space-y-6">
               <h2 className="text-xl md:text-2xl font-creato font-medium text-dark text-center leading-relaxed">
@@ -310,11 +345,11 @@ function App() {
           </QuestionStep>
         )}
 
-        {currentStep === 4 && (
+        {currentStep === 5 && (
           <QuestionStep
             onNext={handleNext}
             onBack={handleBack}
-            canProceed={canProceedStep4}
+            canProceed={canProceedStep5}
           >
             <div className="space-y-6">
               <h2 className="text-xl md:text-2xl font-creato font-medium text-dark text-center leading-relaxed">
@@ -350,11 +385,11 @@ function App() {
           </QuestionStep>
         )}
 
-        {currentStep === 5 && (
+        {currentStep === 6 && (
           <QuestionStep
             onNext={handleNext}
             onBack={handleBack}
-            canProceed={canProceedStep5}
+            canProceed={canProceedStep6}
           >
             <div className="space-y-6">
               <h2 className="text-xl md:text-2xl font-creato font-medium text-dark text-center leading-relaxed">
@@ -390,11 +425,11 @@ function App() {
           </QuestionStep>
         )}
 
-        {currentStep === 6 && (
+        {currentStep === 7 && (
           <QuestionStep
             onNext={handleNext}
             onBack={handleBack}
-            canProceed={canProceedStep6}
+            canProceed={canProceedStep7}
           >
             <div className="space-y-6">
               <h2 className="text-xl md:text-2xl font-creato font-medium text-dark text-center leading-relaxed">
@@ -445,11 +480,11 @@ function App() {
           </QuestionStep>
         )}
 
-        {currentStep === 7 && (
+        {currentStep === 8 && (
           <QuestionStep
             onNext={handleNext}
             onBack={handleBack}
-            canProceed={canProceedStep7}
+            canProceed={canProceedStep8}
             isLastStep
           >
             <div className="space-y-6">
@@ -475,11 +510,12 @@ function App() {
                   Resumen de tus respuestas
                 </h3>
                 <div className="flex flex-col gap-2 text-sm font-garet">
-                  <ResumenRow label="1. Calidad general" value={surveyData.calidadGeneral} />
-                  <ResumenRow label="2. Diseño" value={surveyData.diseno} />
-                  <ResumenRow label="3. Copywriting" value={surveyData.copywriting} />
-                  <ResumenRow label="4. Comunicación" value={surveyData.comunicacion} />
-                  <ResumenRow label="5. Ahorro de tiempo" value={surveyData.ahorroTiempo} />
+                  <ResumenRow label="Cliente / Marca" value={surveyData.nombreCliente} />
+                  <ResumenRow label="2. Calidad general" value={surveyData.calidadGeneral} />
+                  <ResumenRow label="3. Diseño" value={surveyData.diseno} />
+                  <ResumenRow label="4. Copywriting" value={surveyData.copywriting} />
+                  <ResumenRow label="5. Comunicación" value={surveyData.comunicacion} />
+                  <ResumenRow label="6. Ahorro de tiempo" value={surveyData.ahorroTiempo} />
                   <ResumenEnfoque opciones={surveyData.enfoqueTrimestre} />
                 </div>
               </div>

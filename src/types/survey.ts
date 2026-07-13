@@ -1,4 +1,5 @@
 export interface SurveyData {
+  nombreCliente: string;
   calidadGeneral: string;
   diseno: string;
   copywriting: string;
