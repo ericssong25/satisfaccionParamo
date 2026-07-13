@@ -111,8 +111,11 @@ function App() {
       hour12: false,
     });
 
+    const subject = `Encuesta de satisfacción - ${data.nombreCliente} - ${fechaHora}`;
+
     const formData = new FormData();
     formData.append('form-name', 'satisfaccion-clientes');
+    formData.append('subject', subject);
     formData.append('nombre-cliente', data.nombreCliente);
     formData.append('calidad-general', data.calidadGeneral);
     formData.append('diseno', data.diseno);
