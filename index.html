@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evaluación de Calidad y Rendimiento - Páramo Creativo</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <form name="satisfaccion-clientes" netlify netlify-honeypot="bot-field" style="display: none;">
+      <label><strong>Calidad general del contenido:</strong></label>
+      <input type="text" name="calidad-general" />
+      
+      <label><strong>Diseño (línea gráfica y creatividad):</strong></label>
+      <input type="text" name="diseno" />
+      
+      <label><strong>Copywriting (textos y esencia de marca):</strong></label>
+      <input type="text" name="copywriting" />
+      
+      <label><strong>Comunicación con el equipo:</strong></label>
+      <input type="text" name="comunicacion" />
+      
+      <label><strong>Ahorro de tiempo y presencia del negocio:</strong></label>
+      <input type="text" name="ahorro-tiempo" />
+      
+      <label><strong>Enfoque próximo trimestre (múltiple):</strong></label>
+      <input type="text" name="enfoque-trimestre" />
+      
+      <label><strong>Sugerencia o comentario adicional:</strong></label>
+      <textarea name="sugerencia"></textarea>
+      
+      <label><strong>Fecha y Hora:</strong></label>
+      <input type="text" name="fecha-hora" />
+      
+      <label><strong>Dirección IP:</strong></label>
+      <input type="text" name="direccion-ip" />
+      
+      <input type="text" name="bot-field" />
+    </form>
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
